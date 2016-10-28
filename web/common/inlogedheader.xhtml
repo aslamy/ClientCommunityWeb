@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+    <h:head>
+
+    </h:head>
+
+    <div class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#">Welcome</a>
+            </div>
+            <h:form>
+                <ul class="nav navbar-nav ">
+
+                    <li style="margin-top: 20px">
+                        <button onclick="chatPage()" class="btn btn-primary btn-sm btn-link" style="font-size:20px;color:white">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </button>
+                        <span class="badge badge-notify"></span>
+                    </li>
+
+                    <li style="margin-top: 18px">
+                        <button onclick="friendPage()" class="btn btn-primary btn-sm btn-link" style="font-size:20px;color:white">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
+                        <span class="badge badge-notify">#{friendShip.countRequset}</span>
+                    </li>
+
+                    <li><h:commandLink  value="Account" action="#{navigationPage.indexPage}"/></li>
+                    <li><h:commandLink  value="Friends" action="#{navigationPage.friendPage}"/></li>
+                    <li><h:commandLink value="Chat" action="#{navigationPage.chatPage}" /></li>
+                    <li><h:commandLink value="Search" action="#{navigationPage.searchPage}" /></li>
+                    <li><h:commandLink  value="Logout" action="#{loginBean.doLogout}"/></li>
+
+                </ul>
+            </h:form>
+        </div>
+    </div>
+
+    <h:form>
+
+        <p:remoteCommand name="chatRemote" action="#{navigationPage.chatPage}"/>
+        <p:remoteCommand name="friendRemote" action="#{navigationPage.friendPage}"/>
+        <script type="text/javascript">
+            function chatPage() {
+                chatRemote();
+            }
+
+            function friendPage() {
+                friendRemote();
+            }
+        </script>
+
+    </h:form>
+
+
+
+</ui:composition>
+
+
+</html>
+

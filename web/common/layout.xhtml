@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+>
+
+
+<h:head>
+
+
+	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/bootstrap/css/bootstrap.css" />
+	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/dashboard.css" />
+	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" />
+	<!--<h:outputStylesheet library="bootstrap" name="css/bootstrap.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="dashboard.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>-->
+	<h:outputScript name="bootstrap/js/bootstrap.js" />
+	<h:outputScript library="script" name="page.js"  />
+</h:head>
+
+<h:body>
+	<div class="container">
+	<div id="page">
+
+		<div id="header">
+			<ui:insert name="header" >
+				<ui:include src="header.xhtml" />
+			</ui:insert>
+		</div>
+
+
+
+
+		<div id="content">
+			<ui:insert name="content" >
+				<ui:include src="content.xhtml" />
+			</ui:insert>
+		</div>
+
+
+
+		<div id="footer">
+			<ui:insert name="footer" >
+			</ui:insert>
+		</div>
+
+	</div>
+</div>
+</h:body>
+</html>

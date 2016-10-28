@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="community">
+    <output-path>$PROJECT_DIR$/out/artifacts/community</output-path>
+    <root id="archive" name="community.war">
+      <element id="artifact" artifact-name="CommunityWeb:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/javax.el-api.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

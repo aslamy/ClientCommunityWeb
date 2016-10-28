@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <ui:composition template="../common/layout.xhtml">
+
+        <ui:define name="header">
+            <ui:include src="../common/inlogedheader.xhtml" />
+        </ui:define>
+
+        <ui:define name="content">
+            #{chat.init()}
+
+            <div class="row" style="margin-top: 150px">
+
+
+                    <h:form id="menuForm">
+                        <h:panelGroup id="menuData" layout="block">
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                    <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span></span> Inbox
+
+                    </div>
+
+
+                    <div class="panel-body" style="height: 300px; overflow-y: auto;">
+
+
+                        <ui:repeat value="#{chat.inbox}" var="user">
+
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <h:commandButton  value="#{user.username}" styleClass="btn btn-primary col-xs-12 col-lg-12 col-sm-12 col-md-12">
+                                <f:ajax  render=":messageForm:messageMainPanel :divForm" listener="#{chat.showChat(user.userId)}" />
+                            </h:commandButton>
+                            </div>
+                        </div>
+
+
+                        </ui:repeat>
+
+
+                    </div>
+
+
+                    </div>
+                    </div>
+                    </h:panelGroup>
+                </h:form>
+
+                <h:form id="messageForm">
+
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" id="accordion">
+                                <span></span> Chat
+                            </div>
+
+                                <div id="mydiv" class="panel-body" style="height: 250px; overflow-y: auto;">
+                                    <h:panelGroup id="messageMainPanel">
+                                    <ul class=" chat" id="messageContent">
+                                        <ui:repeat value="#{chat.messages}" var="message">
+
+                                            <h:panelGroup rendered="#{message.userId eq chat.receiverId}">
+                                                <li class="left clearfix">
+                                                    <span class="chat-img pull-left">
+                                                        <img src="../resources/images/user.png" alt="User Avatar" class="img-circle"/>
+                                                    </span>
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <strong class="primary-font">#{message.userFirstName} #{message.userLastName}</strong>
+                                                            <small class="pull-right text-muted">
+                                                                <span class="glyphicon glyphicon-time"></span>#{message.created}
+                                                            </small>
+                                                        </div>
+                                                        <p>
+                                                            #{message.text}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup rendered="#{message.userId eq chat.userId}">
+                                                <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="../resources/images/u.png" alt="User Avatar" class="img-circle"/></span>
+
+                                                    <div class="chat-body clearfix">
+                                                        <div class="header">
+                                                            <small class=" text-muted">
+                                                                <span class="glyphicon glyphicon-time"></span>#{message.created}
+                                                            </small>
+
+                                                            <strong class="pull-right primary-font">#{message.userFirstName} #{message.userLastName}</strong>
+                                                        </div>
+                                                        <p>
+                                                            #{message.text}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </h:panelGroup>
+                                        </ui:repeat>
+                                    </ul>
+                                    </h:panelGroup>
+                                </div>
+                                <div class="panel-footer">
+
+                                    <div class="input-group">
+                                        <h:inputText a:placeholder="Type your message here..." styleClass="form-control input-sm" id="messageId" value="#{chat.messageText}">
+                                            <f:ajax process="messageId"/>
+                                        </h:inputText>
+                                        <span class="input-group-btn">
+                                            <h:commandButton id="btn-chat" value="Send" styleClass="btn btn-warning btn-sm">
+                                                <f:ajax execute="@this messageId" render="messageMainPanel :menuForm:menuData messageId :divForm"  listener="#{chat.sendMessage}"/>
+                                            </h:commandButton>
+
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                        </div>
+                    </div>
+
+
+                </h:form>
+
+                <h:form>
+                    <p:poll id="poll" interval="3" listener="#{chat.updatePage()}" update=":messageForm:messageMainPanel :menuForm:menuData :divForm"/>
+                </h:form>
+
+            </div>
+
+            <h:form id="divForm">
+                <script type="text/javascript">
+                    var box = document.getElementById('mydiv');
+                    box.scrollTop = box.scrollHeight;
+                </script>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

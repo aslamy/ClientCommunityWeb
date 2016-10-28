@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+    <ui:composition template="../common/layout.xhtml">
+        <ui:define name="header">
+            <ui:include src="../common/inlogedheader.xhtml" />
+        </ui:define>
+        <ui:define name="content">
+            <div class="row" style="margin-top: 50px">
+            <h:form>
+                <h:inputText a:placeholder="Search for people...." styleClass="form-control" id="search" value="#{search.searchText}"></h:inputText>
+                <f:ajax event="keyup"  listener="#{search.getSearchedUser}" render="search_select"/>
+
+                <h:panelGroup id="search_select" layout="block" style="margin-top: 100px">
+                    <div>
+                        <ui:repeat value="#{search.userList}" var="user">
+                            <div class="col-sm-1">
+                                <div class="thumbnail">
+                                    <h:graphicImage value="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong></strong> <span class="text-muted">
+                                    <h:outputText value="#{user.firstName} #{user.lastName} "/></span>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><h:outputText value="${user.username}"/></td>
+                                            <td><h:outputText value="${user.firstName}"/></td>
+                                            <td><h:outputText value="${user.lastName}"/></td>
+                                            <td><h:outputText value="${user.email}"/></td>
+                                            <td><h:commandButton id="showButton" value="Show" styleClass="btn btn-primary" action="#{people.showUserPage(user.userId)}"/></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

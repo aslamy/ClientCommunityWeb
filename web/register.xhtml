@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+
+    <ui:composition template="common/layout.xhtml">
+        <ui:define name="content">
+            <h2>Register</h2>
+
+            <h:form>
+                <div class="row" style="margin-top: 50px">
+                    <div class="col-md-6">
+                        <h4>Create a new account.</h4>
+                        <h:messages infoClass="text-success" errorClass="text-danger" layout="table" globalOnly="true"
+                        showDetail="false" showSummary="true"/>
+                        <hr/>
+
+                        <h:outputLabel value="Username" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="username" styleClass="text-danger"/>
+                            <h:inputText value="#{register.username}" id="username" required="true"
+                                         requiredMessage="Please enter your username"
+                                         styleClass="form-control form-group"/>
+
+                        </div>
+                        <h:outputLabel value="Password" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="password" styleClass="text-danger"/>
+                            <h:inputSecret validatorMessage="Password should match with confirm password"
+                                        match="confirmpassword" value="#{register.password}" id="password" required="true"
+                                        requiredMessage="Please enter your password"
+                                        styleClass="form-control form-group"/>
+
+                        </div>
+
+
+                        <h:outputLabel value="Confirm password" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="confirmpassword" styleClass="text-danger"/>
+                            <h:inputSecret value="#{register.password}" id="confirmpassword" required="true"
+                                        requiredMessage="Please enter your confirm for password"
+                                        styleClass="form-control form-group"/>
+
+                        </div>
+
+
+                        <h:outputLabel value="Firstname" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="firstname" styleClass="text-danger"/>
+                            <h:inputText value="#{register.firstName}" id="firstname" required="true"
+                                         requiredMessage="Please enter your firstname"
+                                         styleClass="form-control form-group"/>
+
+                        </div>
+
+
+                        <h:outputLabel value="Lastname" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="lastname" styleClass="text-danger"/>
+                            <h:inputText value="#{register.lastName}" id="lastname" required="true"
+                                         requiredMessage="Please enter your lastname"
+                                         styleClass="form-control form-group"/>
+
+                        </div>
+
+                        <h:outputLabel value="Email" styleClass="col-md-3 control-label"/>
+
+                        <div class="col-md-9">
+                            <h:message for="email" styleClass="text-danger"/>
+                            <h:inputText value="#{register.email}" id="email" required="true"
+                                         requiredMessage="Please enter your email"
+                                         styleClass="form-control form-group"/>
+
+                        </div>
+
+                        <div class="col-md-offset-3 col-md-9">
+                            <h:commandButton   id="button" value="Register" action="#{register.doRegister}"
+                                             styleClass="btn btn-default form-group"/>
+                        </div>
+                        <p>
+                            <h:link outcome="login.xhtml" value="Log in"/>
+                        </p>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer"></ui:define>
+    </ui:composition>
+
+</h:body>
+</html>

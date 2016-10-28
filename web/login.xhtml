@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"htth://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<ui:composition template="common/layout.xhtml">
+
+	<ui:define name="content">
+			<h:form id="loginForm">
+				<h2>Log in</h2>
+				<div class="row" style="margin-top: 50px">
+					<div class="col-md-8">
+
+						<h4>Tomcat 1 responded!</h4>
+						<h4>Use a local account to log in.</h4>
+						<hr />
+
+
+						<h:outputLabel value="Username" styleClass="col-md-2 control-label" />
+
+
+						<div class="col-md-10">
+
+							<h:inputText value="#{loginBean.userName}" id="username" required="true" requiredMessage="Please enter your username" styleClass="form-control form-group" />
+						</div>
+						<h:outputLabel value="Password" styleClass="col-md-2 control-label" />
+						<div class="col-md-10">
+							<h:message for="password" styleClass="text-danger"/>
+							<h:inputSecret value="#{loginBean.password}" id="password" required="true" requiredMessage="Please enter your password" styleClass="form-control form-group" />
+						</div>
+						<div class="col-md-offset-2 col-md-10">
+							<h:messages infoClass="text-success" errorClass="text-danger" layout="table" globalOnly="true"
+										showDetail="false" showSummary="true"/>
+							<h:commandButton id="button" value="Log in" action="#{loginBean.doLogin}" styleClass="btn btn-primary form-group" />
+						</div>
+						<p>
+							<h:link outcome="register.xhtml" value="Register as a new user" />
+						</p>
+					</div>
+				</div>
+			</h:form>
+
+		<ui:define name="footer"></ui:define>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>
